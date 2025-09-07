@@ -1,0 +1,54 @@
+============================================================
+AGRICULTURAL ML MODELS TRAINING REPORT
+============================================================
+Total Models Trained: 5
+Random State: 42
+
+Model: N_FERTILIZER
+----------------------------------------
+  Type: Regression (RandomForestRegressor)
+  Train RMSE: 37.3712
+  Test RMSE:  45.2383
+  Train R²:   0.8839
+  Test R²:    0.8347
+  CV RMSE:    46.4077 ± 1.7186
+
+Model: P_FERTILIZER
+----------------------------------------
+  Type: Regression (RandomForestRegressor)
+  Train RMSE: 15.5971
+  Test RMSE:  16.5863
+  Train R²:   0.8851
+  Test R²:    0.8719
+  CV RMSE:    16.5684 ± 0.5059
+
+Model: K_FERTILIZER
+----------------------------------------
+  Type: Regression (RandomForestRegressor)
+  Train RMSE: 60.7476
+  Test RMSE:  71.0122
+  Train R²:   0.9434
+  Test R²:    0.9260
+  CV RMSE:    71.2140 ± 2.0813
+
+Model: IRRIGATION_NEEDED
+----------------------------------------
+  Type: Classification (RandomForestClassifier)
+  Train Accuracy: 0.7770
+  Test Accuracy:  0.7677
+  Test Precision: 0.9520
+  Test Recall:    0.7677
+  Test F1:        0.8304
+  CV Accuracy:    0.7781 ± 0.0049
+
+Model: PEST_ALERT
+----------------------------------------
+  Type: Classification (RandomForestClassifier)
+  Train Accuracy: 0.7504
+  Test Accuracy:  0.6714
+  Test Precision: 0.7209
+  Test Recall:    0.6714
+  Test F1:        0.6906
+  CV Accuracy:    0.6780 ± 0.0021
+
+============================================================
