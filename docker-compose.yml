@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  agricultural-ml-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agricultural-ml-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount data directory for training data
+      - ./data:/app/data
+      # Mount trained_models directory to persist models
+      - ./trained_models:/app/trained_models
+      # Mount logs directory
+      - ./logs:/app/logs
+    environment:
+      - APP_NAME=Agricultural ML API
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - HOST=0.0.0.0
+      - PORT=8000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Development service with hot reload
+  agricultural-ml-api-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agricultural-ml-api-dev
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app
+    environment:
+      - APP_NAME=Agricultural ML API (Development)
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - HOST=0.0.0.0
+      - PORT=8000
+    command: sh -c "python scripts/train_models.py && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    restart: unless-stopped
+    profiles:
+      - dev
